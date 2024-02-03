@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Captcha</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #26f834, #2b51dc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #captcha-container {
+            text-align: center;
+        }
+
+        #slider-container {
+            width: 300px;
+            margin: 20px auto;
+        }
+
+        #captcha-slider {
+            width: 100%;
+            height: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #captcha-slider::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: block;
+            margin-top: -10px;
+            margin-left: -10px;
+            position: relative;
+        }
+
+        #captcha-slider.unlocked {
+            background-color: #2ecc71;
+        }
+
+        #captcha-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="captcha-container">
+        <div id="slider-container">
+            <div id="captcha-slider" onmousedown="startDrag(event)"></div>
+        </div>
+        <p id="captcha-message">Slide to complete the captcha</p>
+    </div>
+
+    <script>
+        let isDragging = false;
+
+        function startDrag(e) {
+            isDragging = true;
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                const slider = document.getElementById('captcha-slider');
+                const container = document.getElementById('slider-container');
+                const offsetX = e.clientX - container.getBoundingClientRect().left;
+
+                if (offsetX >= 0 && offsetX <= container.offsetWidth) {
+                    slider.style.width = offsetX + 'px';
+
+                    if (offsetX >= container.offsetWidth - 20) {
+                        slider.classList.add('unlocked');
+                        document.getElementById('captcha-message').innerText = 'Form Submitted!';
+                    } else {
+                        slider.classList.remove('unlocked');
+                        document.getElementById('captcha-message').innerText = 'Slide to complete the captcha';
+                    }
+                }
+            }
+        }
+
+        function stopDrag() {
+            isDragging = false;
+            document.removeEventListener('mousemove', drag);
+            document.removeEventListener('mouseup', stopDrag);
+        }
+    </script>
+</body>
+
+</html>

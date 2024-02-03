@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        h1 {
+            color: red;
+            font-size: 60px;
+            text-align: center;
+            margin: 80px;
+        }
+
+        #box1 {
+            border: 2px solid black;
+            width: 180px;
+            height: 180px;
+            margin-top: 100px;
+            background-color: red;
+            color: aliceblue;
+            font-size: xx-large;
+        }
+
+        #box2 {
+            border: 2px solid black;
+            width: 180px;
+            height: 180px;
+            margin-top: 100px;
+            background-color: blue;
+            color: aliceblue;
+            font-size: xx-large;
+        }
+
+        #box3 {
+            border: 2px solid black;
+            width: 180px;
+            height: 180px;
+            margin-top: 100px;
+            background-color: orange;
+            color: aliceblue;
+            font-size: xx-large;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 50%;
+            margin: auto;
+        }
+        #captchaCode{
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .submit {
+            display: flex;
+            
+            /* align-items: center; */
+            justify-content: center;
+            margin: 10px;
+        }
+
+        .sub {
+            width: 150px;
+            /* Adjust this value to change the width */
+            height: 50px;
+            /* Adjust this value to change the height */
+            font-size: 16px;
+            text-align: center;
+            justify-content: center;
+        }
+        #captchaCode{
+            width: 250px;
+            height: 50px;
+            border: 2px solid black;
+            color: rgb(201, 199, 196);
+            /* background-color: bisque; */
+            padding: 20px;
+            background: repeating-linear-gradient(45deg, #474646 0,
+                                                #312c2c 5px, 
+                                                #8c7d7d 6px, 
+                                                #ab9393 11px, 
+                                                #8a7e7e 12px);
+            font-size: 20px;
+        }
+        #para {
+            font-size: 25px;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="height: 100%;">
+    <h1>PUZZLE</h1>
+    <hr  color="yellow">
+    <hr color="white">
+    <hr color="blue">
+    <hr color="pink">
+    <div style="height: 100%;">
+        <span class="box" id="box1" onclick=""></span>
+        <span id="box2" class="box"></span>
+        <span id="box3" class="box"></span>
+
+    </div>
+    <span class="submit"><button class="sub" id="click">Next</button></span>
+    <div id="captchaCode"></div><br>
+    <span class="submit"><input type="text last" id="captchaText" placeholder="Enter Output"></span><br>
+    <span class="submit"><button class="sub last" onclick="validateCaptcha()">Submit</button></span><br>
+    <!-- <button onclick="regenerateCaptcha()">Regenerate Captcha</button><br> -->
+    
+    <!-- <span class="submit"><button id="sub">Next</button></span> -->
+    
+
+    <script>
+        var ele1 = document.querySelector("#box1");
+        ele1.addEventListener("mousedown", function () {
+            // ele1.style.background-color = "white";
+            if (document.getElementById("box1").style.backgroundColor === "red")
+                document.getElementById("box1").style.backgroundColor = "green";
+            else if (document.getElementById("box1").style.backgroundColor === "green")
+                document.getElementById("box1").style.backgroundColor = "white"
+            else if (document.getElementById("box1").style.backgroundColor === "white")
+                document.getElementById("box1").style.backgroundColor = "orange"
+            else if (document.getElementById("box1").style.backgroundColor === "orange")
+                document.getElementById("box1").style.backgroundColor = "yellow"
+            else if (document.getElementById("box1").style.backgroundColor === "yellow")
+                document.getElementById("box1").style.backgroundColor = "blue"
+            else if (document.getElementById("box1").style.backgroundColor === "blue")
+                document.getElementById("box1").style.backgroundColor = "maroon"
+            else if (document.getElementById("box1").style.backgroundColor === "maroon")
+                document.getElementById("box1").style.backgroundColor = "pink"
+            else
+                document.getElementById("box1").style.backgroundColor = "red"
+            // console.log(color);
+            // console.log(details);
+        })
+        var ele2 = document.querySelector("#box2");
+        ele2.addEventListener("mousedown", function () {
+            if (document.getElementById("box2").style.backgroundColor === "blue")
+                document.getElementById("box2").style.backgroundColor = "white";
+            else if (document.getElementById("box2").style.backgroundColor === "white")
+                document.getElementById("box2").style.backgroundColor = "pink"
+            else if (document.getElementById("box2").style.backgroundColor === "pink")
+                document.getElementById("box2").style.backgroundColor = "green"
+            else if (document.getElementById("box2").style.backgroundColor === "green")
+                document.getElementById("box2").style.backgroundColor = "yellow"
+            else if (document.getElementById("box2").style.backgroundColor === "yellow")
+                document.getElementById("box2").style.backgroundColor = "red"
+            else if (document.getElementById("box2").style.backgroundColor === "red")
+                document.getElementById("box2").style.backgroundColor = "maroon"
+            else if (document.getElementById("box2").style.backgroundColor === "maroon")
+                document.getElementById("box2").style.backgroundColor = "grey"
+            else
+                document.getElementById("box2").style.backgroundColor = "blue"
+        })
+        var ele3 = document.querySelector("#box3");
+        ele3.addEventListener("mousedown", function () {
+            if (document.getElementById("box3").style.backgroundColor === "orange")
+                document.getElementById("box3").style.backgroundColor = "blue";
+            else if (document.getElementById("box3").style.backgroundColor === "blue")
+                document.getElementById("box3").style.backgroundColor = "red"
+            else if (document.getElementById("box3").style.backgroundColor === "red")
+                document.getElementById("box3").style.backgroundColor = "maroon"
+            else if (document.getElementById("box3").style.backgroundColor === "maroon")
+                document.getElementById("box3").style.backgroundColor = "yellow"
+            else if (document.getElementById("box3").style.backgroundColor === "yellow")
+                document.getElementById("box3").style.backgroundColor = "pink"
+            else if (document.getElementById("box3").style.backgroundColor === "pink")
+                document.getElementById("box3").style.backgroundColor = "white"
+            else if (document.getElementById("box3").style.backgroundColor === "white")
+                document.getElementById("box3").style.backgroundColor = "purple"
+            else
+                document.getElementById("box3").style.backgroundColor = "orange"
+            // console.log(color);
+            // console.log(details);
+        })
+
+        var ele = document.querySelector("#click");
+        ele.addEventListener("mousedown", function () {
+            var box1Color = document.getElementById("box1").style.backgroundColor;
+            var box2Color = document.getElementById("box2").style.backgroundColor;
+            var box3Color = document.getElementById("box3").style.backgroundColor;
+            console.log(box1Color)
+            console.log(box2Color)
+            console.log(box3Color)
+            if (box1Color === box2Color && box2Color === box3Color && box3Color === "yellow") {
+                generateCaptcha();
+            }
+            else if (box1Color === box2Color && box2Color === box3Color && box3Color === "white") {
+                generateCaptcha();
+            }
+            else if (box1Color === box2Color && box2Color === box3Color && box3Color === "blue") {
+                generateCaptcha();
+            }
+            else if (box1Color === box2Color && box2Color === box3Color && box3Color === "pink") {
+                generateCaptcha();
+            } else {
+                document.getElementById("CaptchaCode").textContent = "There is a clue below the heading!!"
+            }
+        });
+        const codeSnippets = [
+            {
+                code: 'How many colors are in rainbow?',
+                output:'7'
+            },
+            {
+              code: 'Number of spokes in ashok chakra?',
+                output: '24'
+            },
+            {
+                code: 'How many teeth does a human have?',
+                output: '32'
+            },
+            {
+               code: 'What come after 8?',
+                output: '9'
+            },
+            {
+                code: 'sum 4+3?',
+                output: '7'
+            },
+        ];
+
+        let currentCaptchaIndex = 0;
+        let captchaOutput = '';
+
+        function generateCaptcha() {
+            currentCaptchaIndex = Math.floor(Math.random() * codeSnippets.length);
+            captchaOutput = codeSnippets[currentCaptchaIndex].output;
+            document.getElementById('captchaCode').innerText = codeSnippets[currentCaptchaIndex].code;
+        }
+
+        function validateCaptcha() {
+            let enteredOutput = document.getElementById('captchaText').value;
+
+            if (enteredOutput === captchaOutput) {
+                alert('Form is submitted');
+            } else {
+                alert('Captcha is invalid. Try again.');
+            }
+        }
+    </script>
+</body>
+
+</html>

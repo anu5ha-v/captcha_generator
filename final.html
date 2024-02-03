@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #26f834, #2b51dc);
+            height: 100vh;
+            overflow: hidden;
+            color: beige;
+            
+        }
+
+        .register {
+            position: absolute; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid white;
+            border-radius: 2%;
+            padding: 1rem;
+        }
+
+        .register h1 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid silver;
+        }
+
+        .register form {
+            padding: 30px 10px;
+        }
+
+        form input {
+            border: none;
+            outline: none;
+            padding: 2px;
+            border-radius: 4px;
+            background-color: transparent;
+            border-bottom: 1px solid silver;
+            margin: 8px;
+
+        }
+
+        form label {
+            margin: 10px;
+        }
+
+        .upload {
+            border-radius: 6px;
+            padding: 2px;
+        }
+
+        .align {
+            margin: 15px;
+        }
+
+        #date {
+            color: aliceblue;
+        }
+
+        .terms {
+            color: white;
+        }
+
+        .submit {
+            color: white;
+            padding: 5px;
+            width: 20%;
+            margin-top: 50px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            border-bottom: 1px solid silver;
+        }
+
+        #password-strength {
+            font-size: small;
+            color: rgb(229, 255, 79);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="register">
+        <h1>Registration Form</h1>
+        <form onsubmit="return choose()" method="post">
+            <label for="fname" class="align">First Name:</label>
+            <input type="text" class="align" name="fname" id="fname" required><br>
+
+            <label for="lname" class="align">Last Name:</label>
+            <input type="text" class="align" name="lname" id="lname" required><br>
+
+            <label for="email" class="align">Email:</label>
+            <input type="email" class="align" name="email" id="email" required><br>
+
+            <label class="align" for="options">Choose the type of captcha:</label>
+            <select id="captcha" class="align">
+                <!-- onchange="showMessage()" -->
+                <option value="opt1">Code</option>
+                <option value="opt2">Image</option>
+                <option value="opt3">Math</option>
+                <option value="opt4">Slider</option>
+                <option value="opt5">Puzzle</option>
+                <option value="opt6">Letters 1</option>
+                <option value="opt7">Letters 2</option>
+                <option value="opt8">Medical</option>
+                <option value="opt9">GK</option>
+                <option value="opt10">Tricky</option>
+            </select>
+        
+            <div id="result"></div>
+        <br><br>
+            <input type="submit" value="Next" class="submit align">
+        </form>
+    </div>
+    <script>
+        const strengthIndicator = document.getElementById('password-strength');
+
+        function checkPasswordStrength(password) {
+            const strength = calculatePasswordStrength(password);
+            const indicators = ['Weak', 'Medium', 'Strong'];
+            const indicator = indicators[strength];
+            strengthIndicator.textContent = `Password Strength: ${indicator}`;
+        }
+
+        function calculatePasswordStrength(password) {
+            if (password.length < 5) {
+                return 0;
+            }
+            if (password.length < 8) {
+                return 1;
+            }
+            return 2;
+        }
+        function choose() {
+            var ch = document.getElementById("captcha");
+            var selectedOption = ch.value;
+            if (selectedOption === "opt1")
+                window.location.href = "code.html";
+            else if (selectedOption === "opt2")
+                window.location.href = "image.html";
+            else if (selectedOption === "opt3")
+                window.location.href = "math.html";
+            else if (selectedOption === "opt4")
+            window.location.href = "anotherslider.html";
+            else if (selectedOption === "opt5")
+            window.location.href = "slider.html";
+            else if (selectedOption === "opt6")
+            window.location.href = "index1.html";
+            else if (selectedOption === "opt7")
+            window.location.href = "index2.html";
+            else if (selectedOption === "opt8")
+            window.location.href = "medical.html";
+            else if (selectedOption === "opt9")
+            window.location.href = "gk.html";
+            else if (selectedOption === "opt10")
+            window.location.href = "new.html";
+            return false;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tricky Java Code Captcha</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #26f834, #2b51dc);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        input {
+            /* margin-top: 10px;
+            padding: 10px; */
+            font-size: 16px;
+            color: white;
+            padding: 5px;
+            width: 20%;
+            margin-top: 30px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            border-bottom: 1px solid silver;
+        }
+
+        input::placeholder {
+            color: #fff;
+            /* Set the color to white or any other desired color */
+        }
+
+        button {
+            /* margin-top: 10px;
+            padding: 10px;
+            font-size: 16px; */
+            color: white;
+            padding: 5px;
+            width: 20%;
+            margin-top: 10px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            border-bottom: 1px solid silver;
+        }
+
+        #captchaCode {
+            width: 250px;
+            height: 120px;
+            border: 2px solid black;
+            color: rgb(201, 199, 196);
+            /* background-color: bisque; */
+            padding: 20px;
+            background: repeating-linear-gradient(45deg, #474646 0,
+                    #312c2c 5px,
+                    #8c7d7d 6px,
+                    #ab9393 11px,
+                    #8a7e7e 12px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="captchaCode"></div><br>
+    <input type="text" id="captchaText" placeholder="Enter Output"><br>
+    <button onclick="validateCaptcha()">Validate Captcha</button><br>
+    <button onclick="regenerateCaptcha()">Regenerate Captcha</button><br>
+
+    <script>
+        const codeSnippets = [
+            {
+                code: 'int main()\n{int num = 25;\nprintf("%c", num + 65);\nreturn 0;}',
+                output: 'Z'
+        },
+        {
+            code: 'int main()\n{int x = 5;\nint y = x++;\nprintf("%d", y + x);\nreturn 0;}',
+            output: '11'
+        },
+        {
+            code: 'int main() \n{ int a = 7, b = 3; \nint result = (a > b) ? (a + b) : (a - b); printf("%d", result); \nreturn 0; }',
+                output: '10'
+        },
+        {
+            code: 'int main()\n{ int n = 7; \nint result = n * (n - 1) / 2; \nprintf("%d", result); return 0; }',
+                output: '21'
+        }
+        ];
+
+        let currentCaptchaIndex = 0;
+        let captchaOutput = '';
+
+        function generateCaptcha() {
+            currentCaptchaIndex = Math.floor(Math.random() * codeSnippets.length);
+            captchaOutput = codeSnippets[currentCaptchaIndex].output;
+            document.getElementById('captchaCode').innerText = codeSnippets[currentCaptchaIndex].code;
+        }
+
+        function validateCaptcha() {
+            let enteredOutput = document.getElementById('captchaText').value;
+
+            if (enteredOutput === captchaOutput) {
+                alert('Form is submitted!');
+            } else {
+                alert('Captcha is invalid. Try again.');
+            }
+
+            regenerateCaptcha();
+        }
+
+        function regenerateCaptcha() {
+            document.getElementById('captchaText').value = '';
+            generateCaptcha();
+        }
+
+        generateCaptcha();
+    </script>
+</body>
+
+</html>
